@@ -1,7 +1,7 @@
 import { type Registry, Counter, Gauge } from 'prom-client'
 import { type Pool, type PoolClient } from 'pg'
 import { type PgPoolExporterOptions } from './pgPoolExporterOptions'
-import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels, getMaxPoolSize } from './utils'
+import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels, getMaxPoolSize, getDatabase, getHost, getPort } from './utils'
 
 /**
  * Exports metrics for the pg.Pool module
@@ -97,9 +97,9 @@ export class PgPoolPrometheusExporter {
     })
 
     this.poolMaxSize = getMaxPoolSize(pool)
-    this.poolHost = this.getHost(pool)
-    this.poolPort = this.getPort(pool)
-    this.poolDatabase = this.getDatabase(pool)
+    this.poolHost = getHost(pool)
+    this.poolPort = getPort(pool)
+    this.poolDatabase = getDatabase(pool)
   }
 
   public enableMetrics (): void {
@@ -130,20 +130,5 @@ export class PgPoolPrometheusExporter {
   onPoolConnectionRemoved (client: PoolClient): void {
     this.poolSize.dec(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort, database: this.poolDatabase }, this.options.defaultLabels))
     this.poolConnectionsRemovedTotal.inc(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort, database: this.poolDatabase }, this.options.defaultLabels))
-  }
-
-  private getHost (pool: Pool): string | undefined {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-    return (pool as any).options?.host
-  }
-
-  private getPort (pool: Pool): number | undefined {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-    return (pool as any).options?.port
-  }
-
-  private getDatabase (pool: Pool): string | undefined {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-    return (pool as any).options?.database
   }
 }

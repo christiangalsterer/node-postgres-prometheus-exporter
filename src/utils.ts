@@ -29,7 +29,42 @@ export function mergeLabelsWithStandardLabels (labels: Record<string, string | n
   return merged
 }
 
+/**
+ * Tries to determine the max pool size from the pool via direct property access as the configuarion is not exported
+ * @param pool the pool from which to get the property
+ * @returns the configured max pool size or undefined
+ */
 export function getMaxPoolSize (pool: Pool): number | undefined {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
   return (pool as any).options?.max
+}
+
+/**
+ * Tries to determine the host configuration from the pool via direct property access as the configuarion is not exported
+ * @param pool the pool from which to get the property
+ * @returns the configured host or undefined
+ */
+export function getHost (pool: Pool): string | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
+  return (pool as any).options?.host
+}
+
+/**
+ * Tries to determine the port configuration from the pool via direct property access as the configuarion is not exported
+ * @param pool the pool from which to get the property
+ * @returns the configured port or undefined
+ */
+export function getPort (pool: Pool): number | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
+  return (pool as any).options?.port
+}
+
+/**
+ * Tries to determine the database configuration from the pool via direct property access as the configuarion is not exported
+ * @param pool the pool from which to get the property
+ * @returns the configured database or undefined
+ */
+export function getDatabase (pool: Pool): string | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
+  return (pool as any).options?.database
 }

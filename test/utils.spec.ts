@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals'
-import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels, getMaxPoolSize } from '../src/utils'
+import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels, getMaxPoolSize, getHost, getPort, getDatabase } from '../src/utils'
 
 describe('tests mergeLabelNamesWithStandardLabels', () => {
   const defaultLabels = { foo: 'bar', alice: 3 }
@@ -66,5 +66,77 @@ describe('tests getMaxPoolSize', () => {
   test('test getMaxPoolSize with defined max', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(getMaxPoolSize(definedMax)).toStrictEqual(5)
+  })
+})
+
+describe('tests getHost', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const undefinedPool: any = { options: undefined }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const undefinedHost: any = { options: { host: undefined } }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const definedHost: any = { options: { host: 'localhost' } }
+
+  test('test getHost with undefined pool', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getHost(undefinedPool)).toStrictEqual(undefined)
+  })
+
+  test('test getHost with undefined host', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getHost(undefinedHost)).toStrictEqual(undefined)
+  })
+
+  test('test getHost with defined host', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getHost(definedHost)).toStrictEqual('localhost')
+  })
+})
+
+describe('tests getPort', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const undefinedPool: any = { options: undefined }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const undefinedPort: any = { options: { port: undefined } }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const definedPort: any = { options: { port: 5432 } }
+
+  test('test getPort with undefined pool', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getPort(undefinedPool)).toStrictEqual(undefined)
+  })
+
+  test('test getPort with undefined port', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getPort(undefinedPort)).toStrictEqual(undefined)
+  })
+
+  test('test getPort with defined port', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getPort(definedPort)).toStrictEqual(5432)
+  })
+})
+
+describe('tests getDatabase', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const undefinedPool: any = { options: undefined }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const undefinedDatabase: any = { options: { database: undefined } }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const definedDatabase: any = { options: { database: 'database' } }
+
+  test('test getDatabase with undefined pool', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getDatabase(undefinedPool)).toStrictEqual(undefined)
+  })
+
+  test('test getDatabase with undefined database', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getDatabase(undefinedDatabase)).toStrictEqual(undefined)
+  })
+
+  test('test getDatabase with defined database', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    expect(getDatabase(definedDatabase)).toStrictEqual('database')
   })
 })

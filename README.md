@@ -127,14 +127,13 @@ The following example illustrates how to use the exporter to enable monitoring f
 ```js
 const pg = require('pg')
 const promClient = require( 'prom-client');
-const kafkaExporter = require('@christiangalsterer/node-postgres-prometheus-exporter')
-...
+const postgresExporter = require('@christiangalsterer/node-postgres-prometheus-exporter')
 
-// set up the pg.Client
-const client = new Client()
+// set up a pg.Client
+const client = new pg.Client()
 
-// set up the pg.Pool
-const pool = new Pool()
+// set up a pg.Pool
+const pool = new pg.Pool()
 
 // set up the prometheus client
 const collectDefaultMetrics = promClient.collectDefaultMetrics;
@@ -142,13 +141,11 @@ const Registry = promClient.Registry;
 const register = new Registry();
 collectDefaultMetrics({ register });
 
-// monitor node-postgres producer
-kafkaExporter.monitornode-postgresProducer(producer, register)
+// monitor the pg.Client
+postgresExporter.monitorPgClient(client, register)
 
-// monitor node-postgres consumer
-kafkaExporter.monitornode-postgresConsumer(consumer, register)
-
-...
+// monitor the pg.Pool
+postgresExporter.monitorPgPool(pool, register)
 
 // connect to Postgres *after* calling monitorPgClient() / monitorPgPool()
 await client.connect()

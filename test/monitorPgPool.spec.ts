@@ -5,7 +5,7 @@ import { monitorPgPool } from '../src/monitorPgPool'
 import { PgPoolPrometheusExporter } from '../src/pgPoolPrometheusExporter'
 import { type Pool } from 'pg'
 
-jest.mock('../src/PgPoolPrometheusExporter')
+jest.mock('../src/pgPoolPrometheusExporter')
 const mockPgPoolPrometheusExporter = jest.mocked(PgPoolPrometheusExporter)
 
 describe('tests monitorPgPool', () => {

@@ -1,3 +1,5 @@
+import { type Pool } from 'pg'
+
 /**
  * Merges an array of label names with the label names of the default labels into a new array.
  * @param labelNames array of label names to merge with the default labels
@@ -25,4 +27,9 @@ export function mergeLabelsWithStandardLabels (labels: Record<string, string | n
   ) as Record<string, string | number>
   defaultLabels !== undefined ? merged = { ...filtered, ...defaultLabels } : merged = filtered
   return merged
+}
+
+export function getMaxPoolSize (pool: Pool): number | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
+  return (pool as any).options?.max
 }

@@ -1,7 +1,7 @@
 import { type Registry, Counter, Gauge } from 'prom-client'
 import { type Pool, type PoolClient } from 'pg'
 import { type PgPoolExporterOptions } from './pgPoolExporterOptions'
-import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels } from './utils'
+import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels, getMaxPoolSize } from './utils'
 
 /**
  * Exports metrics for the pg.Pool module
@@ -96,7 +96,7 @@ export class PgPoolPrometheusExporter {
       registers: [this.register]
     })
 
-    this.poolMaxSize = this.getMaxPoolSize(pool)
+    this.poolMaxSize = getMaxPoolSize(pool)
     this.poolHost = this.getHost(pool)
     this.poolPort = this.getPort(pool)
     this.poolDatabase = this.getDatabase(pool)
@@ -130,11 +130,6 @@ export class PgPoolPrometheusExporter {
   onPoolConnectionRemoved (client: PoolClient): void {
     this.poolSize.dec(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort, database: this.poolDatabase }, this.options.defaultLabels))
     this.poolConnectionsRemovedTotal.inc(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort, database: this.poolDatabase }, this.options.defaultLabels))
-  }
-
-  private getMaxPoolSize (pool: Pool): number | undefined {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-    return (pool as any).options?.max
   }
 
   private getHost (pool: Pool): string | undefined {

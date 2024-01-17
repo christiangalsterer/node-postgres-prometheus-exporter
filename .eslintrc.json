@@ -1,0 +1,45 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "standard-with-typescript",
+        "plugin:@typescript-eslint/strict-type-checked",
+        "plugin:@typescript-eslint/stylistic-type-checked"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "@typescript-eslint/no-non-null-assertion": "warn"
+    },
+    "root": true,
+    "overrides": [
+        {
+            "files": ["src/**/*.ts"],
+            "parserOptions": {
+                "project": ["./tsconfig.json"]
+            }
+        },
+        {
+            "files": ["test/**/*.ts"],
+            "plugins": ["jest"],
+            "parserOptions": {
+                "project": ["./tsconfig.test.json"]
+            },
+            "rules": {
+                // you should turn the original rule off *only* for test files
+                "@typescript-eslint/unbound-method": "off",
+                "jest/unbound-method": "error"
+            } 
+        }
+    ],
+    "ignorePatterns": ["dist/**/*.*", "**/*.js"]
+}

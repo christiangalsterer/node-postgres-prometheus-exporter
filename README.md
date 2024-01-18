@@ -17,7 +17,7 @@ The exporter provides the following metrics.
 
 |Metric Name|Description|Labels|Since|
 |---|---|---|---|
-|pg_client_errors_total|The total number of connection errors with a database|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><li>_error_: The error message</li><ul>|1.0.0|
+|pg_client_errors_total|The total number of connection errors with a database|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><<ul>|1.0.0|
 |pg_client_disconnects_total|The total number of disconnected connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 
 ### pg.Pool Metrics
@@ -27,7 +27,7 @@ The exporter provides the following metrics.
 |pg_pool_connections_created_total|The total number of created connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 |pg_pool_size|The current size of the connection pool, including actice and idle members|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 |pg_pool_active_connections|The total number of active connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
-|pg_pool_errors_total|The total number of connection errors with a database|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><li>_error_: The error message</li><ul>|1.0.0|
+|pg_pool_errors_total|The total number of connection errors with a database|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 |pg_pool_connections_removed_total|The total number of removed connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 
 ## Example Output
@@ -37,7 +37,7 @@ Here an example output in the prometheus format of the provided metrics.
 ```sh
 # HELP pg_client_errors_total The total number of connection errors with a database.
 # TYPE pg_client_errors_total counter
-pg_client_errors_total{host="localhost:5432",database="node_postgres_test1",error="error"} 1
+pg_client_errors_total{host="localhost:5432",database="node_postgres_test1"} 1
 
 # HELP pg_client_disconnects_total The total number of disconnected connections.
 # TYPE pg_client_disconnects_total counter
@@ -69,7 +69,7 @@ pg_pool_idle_connections{host="localhost:5432",database="node_postgres_test1"} 0
 
 # HELP pg_pool_errors_total The total number of connection errors with a database.
 # TYPE pg_pool_errors_total counter
-pg_pool_errors_total{host="localhost:5432",database="node_postgres_test1",error="error"} 1
+pg_pool_errors_total{host="localhost:5432",database="node_postgres_test1"} 1
 
 # HELP pg_pool_connections_removed_total The total number of removed connections.
 # TYPE pg_pool_connections_removed_total counter

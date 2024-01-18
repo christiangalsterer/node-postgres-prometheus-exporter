@@ -31,7 +31,7 @@ describe('test if all client metrics are created with the correct parameters', (
     expect(Counter).toHaveBeenCalledWith({
       name: 'pg_client_errors_total',
       help: 'The total number of connection errors with a database.',
-      labelNames: ['host', 'database', 'error'],
+      labelNames: ['host', 'database'],
       registers: [register]
     })
 
@@ -52,7 +52,7 @@ describe('test if all client metrics are created with the correct parameters', (
     expect(Counter).toHaveBeenCalledWith({
       name: 'pg_client_errors_total',
       help: 'The total number of connection errors with a database.',
-      labelNames: ['host', 'database', 'error', 'foo', 'alice'],
+      labelNames: ['host', 'database', 'foo', 'alice'],
       registers: [register]
     })
 

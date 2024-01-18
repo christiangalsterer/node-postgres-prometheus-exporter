@@ -23,7 +23,7 @@ export class PgClientPrometheusExporter {
     this.clientErrors = new Counter({
       name: 'pg_client_errors_total',
       help: 'The total number of connection errors with a database.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database', 'error'], this.options.defaultLabels),
+      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
       registers: [this.register]
     })
 
@@ -40,8 +40,8 @@ export class PgClientPrometheusExporter {
     this.client.on('end', () => { this.onClientEnd() })
   }
 
-  onClientError (error: Error): void {
-    this.clientErrors.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port, database: this.client.database!, error: error.message }, this.options.defaultLabels))
+  onClientError (_error: Error): void {
+    this.clientErrors.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port, database: this.client.database! }, this.options.defaultLabels))
   }
 
   onClientEnd (): void {

@@ -91,9 +91,9 @@ npm i @christiangalsterer/node-postgres-prometheus-exporter
 The following example illustrates how to use the exporter to enable monitoring for the node-postgres.
 
 ```ts
-import { Client, Pool } from "pg";
-import { Registry, collectDefaultMetrics } from "prom-client";
-import { monitorPgClient, monitorPgPool } from "@christiangalsterer/node-postgres-prometheus-exporter";
+import { Client, Pool } from 'pg'
+import { Registry, collectDefaultMetrics } from 'prom-client'
+import { monitorPgClient, monitorPgPool } from '@christiangalsterer/node-postgres-prometheus-exporter'
 
 ...
 

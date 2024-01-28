@@ -17,7 +17,7 @@ The exporter provides the following metrics.
 
 |Metric Name|Description|Labels|Since|
 |---|---|---|---|
-|pg_client_errors_total|The total number of connection errors with a database|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><<ul>|1.0.0|
+|pg_client_errors_total|The total number of connection errors with a database|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 |pg_client_disconnects_total|The total number of disconnected connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 
 ### pg.Pool Metrics

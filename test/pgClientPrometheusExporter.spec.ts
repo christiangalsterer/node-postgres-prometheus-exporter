@@ -7,6 +7,9 @@ import { Client } from 'pg'
 describe('tests pgClientPrometheusExporter', () => {
   let register: Registry
   const client = new Client()
+  const metrics: string[] = [
+    'pg_client_errors_total', 'pg_client_disconnects_total'
+  ]
 
   beforeEach(() => {
     register = new Registry()
@@ -15,17 +18,19 @@ describe('tests pgClientPrometheusExporter', () => {
   test('test if all metrics are registered in registry', () => {
     // eslint-disable-next-line no-new
     new PgClientPrometheusExporter(client, register)
-    expect(register.getSingleMetric('pg_client_errors_total')).toBeDefined()
-    expect(register.getSingleMetric('pg_client_disconnects_total')).toBeDefined()
-    expect(register.getMetricsAsArray().length).toBe(2)
+    expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
+    metrics.forEach(metric => {
+      expect(register.getSingleMetric(metric)).toBeDefined()
+    })
   })
 
   test('test if all metrics are registered in registry with defaultLabels', () => {
     const options = { defaultLabels: { foo: 'bar', alice: 2 } }
     // eslint-disable-next-line no-new
     new PgClientPrometheusExporter(client, register, options)
-    expect(register.getSingleMetric('pg_client_errors_total')).toBeDefined()
-    expect(register.getSingleMetric('pg_client_disconnects_total')).toBeDefined()
-    expect(register.getMetricsAsArray().length).toBe(2)
+    expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
+    metrics.forEach(metric => {
+      expect(register.getSingleMetric(metric)).toBeDefined()
+    })
   })
 })

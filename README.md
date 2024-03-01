@@ -2,7 +2,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/christiangalsterer/node-postgres-prometheus-exporter/badge.svg)](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/security/advisories)
 [![npm downloads](https://img.shields.io/npm/dt/@christiangalsterer/node-postgres-prometheus-exporter.svg)](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter)
 [![npm version](https://img.shields.io/npm/v/@christiangalsterer/node-postgres-prometheus-exporter.svg)](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter?activeTab=versions)
-[![npm licence](https://img.shields.io/npm/l/@christiangalsterer/node-postgres-prometheus-exporter.svg)](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter)
+[![npm license](https://img.shields.io/npm/l/@christiangalsterer/node-postgres-prometheus-exporter.svg)](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter)
 [![renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://developer.mend.io/github/christiangalsterer/node-postgres-prometheus-exporter)
 ![github stars](https://img.shields.io/github/stars/christiangalsterer/node-postgres-prometheus-exporter.svg)
 
@@ -25,7 +25,7 @@ The exporter provides the following metrics.
 |Metric Name|Description|Labels|Since|
 |---|---|---|---|
 |pg_pool_connections_created_total|The total number of created connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
-|pg_pool_size|The current size of the connection pool, including actice and idle members|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
+|pg_pool_size|The current size of the connection pool, including active and idle members|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 |pg_pool_active_connections|The total number of active connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 |pg_pool_errors_total|The total number of connection errors with a database|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
 |pg_pool_connections_removed_total|The total number of removed connections|<ul><li>_host_: The host of the database.</li><li>_database_: The database name</li><ul>|1.0.0|
@@ -47,7 +47,7 @@ pg_client_disconnects_total{host="localhost:5432",database="node_postgres_test1"
 # TYPE pg_pool_connections_created_total counter
 pg_pool_connections_created_total{host="localhost:5432",database="node_postgres_test1"} 19
 
-# HELP pg_pool_size The current size of the connection pool, including actice and idle members.
+# HELP pg_pool_size The current size of the connection pool, including active and idle members.
 # TYPE pg_pool_size gauge
 pg_pool_size{host="localhost:5432",database="node_postgres_test1"} 10
 
@@ -80,7 +80,7 @@ pg_pool_connections_removed_total{host="localhost:5432",database="node_postgres_
 
 ## Add Dependency
 
-Add the following dependency to your project to download the packge from [npm](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter).
+Add the following dependency to your project to download the package from [npm](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter).
 
 ```sh
 npm i @christiangalsterer/node-postgres-prometheus-exporter

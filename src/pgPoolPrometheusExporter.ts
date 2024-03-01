@@ -40,7 +40,7 @@ export class PgPoolPrometheusExporter {
 
     this.poolSize = new Gauge({
       name: 'pg_pool_size',
-      help: 'The current size of the connection pool, including actice and idle members.',
+      help: 'The current size of the connection pool, including active and idle members.',
       labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
       registers: [this.register]
     })

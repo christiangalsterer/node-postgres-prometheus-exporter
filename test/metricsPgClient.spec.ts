@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { beforeEach } from '@jest/globals'
-import { PgClientPrometheusExporter } from '../src/pgClientPrometheusExporter'
 import { Client } from 'pg'
 import { Counter, type Registry } from 'prom-client'
+import { PgClientPrometheusExporter } from '../src/pgClientPrometheusExporter'
 
 jest.mock('prom-client', () => ({
   Counter: jest.fn(() => {

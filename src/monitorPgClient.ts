@@ -1,7 +1,7 @@
-import { type Registry } from 'prom-client'
 import { type Client } from 'pg'
-import { PgClientPrometheusExporter } from './pgClientPrometheusExporter'
+import { type Registry } from 'prom-client'
 import { type PgClientExporterOptions } from './pgClientExporterOptions'
+import { PgClientPrometheusExporter } from './pgClientPrometheusExporter'
 
 /**
  * Exposes metrics for a pg.client in prometheus format.

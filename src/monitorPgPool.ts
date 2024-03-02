@@ -1,7 +1,7 @@
-import { type Registry } from 'prom-client'
 import { type Pool } from 'pg'
-import { PgPoolPrometheusExporter } from './pgPoolPrometheusExporter'
+import { type Registry } from 'prom-client'
 import { type PgPoolExporterOptions } from './pgPoolExporterOptions'
+import { PgPoolPrometheusExporter } from './pgPoolPrometheusExporter'
 
 /**
  * Exposes metrics for a pg.pool in prometheus format.

@@ -1,9 +1,9 @@
-import { beforeEach, describe, expect, test, jest } from '@jest/globals'
+import { beforeEach, describe, expect, jest, test } from '@jest/globals'
 import { Registry } from 'prom-client'
 
+import { type Pool } from 'pg'
 import { monitorPgPool } from '../src/monitorPgPool'
 import { PgPoolPrometheusExporter } from '../src/pgPoolPrometheusExporter'
-import { type Pool } from 'pg'
 
 jest.mock('../src/pgPoolPrometheusExporter')
 const mockPgPoolPrometheusExporter = jest.mocked(PgPoolPrometheusExporter)

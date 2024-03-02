@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals'
-import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels, getMaxPoolSize, getHost, getPort, getDatabase } from '../src/utils'
+import { getDatabase, getHost, getMaxPoolSize, getPort, mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels } from '../src/utils'
 
 describe('tests mergeLabelNamesWithStandardLabels', () => {
   const defaultLabels = { foo: 'bar', alice: 3 }

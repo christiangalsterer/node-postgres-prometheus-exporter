@@ -1,7 +1,7 @@
-import { type Registry, Counter, Gauge } from 'prom-client'
 import { type Pool, type PoolClient } from 'pg'
+import { Counter, Gauge, type Registry } from 'prom-client'
 import { type PgPoolExporterOptions } from './pgPoolExporterOptions'
-import { mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels, getMaxPoolSize, getDatabase, getHost, getPort } from './utils'
+import { getDatabase, getHost, getMaxPoolSize, getPort, mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels } from './utils'
 
 /**
  * Exports metrics for the pg.Pool module

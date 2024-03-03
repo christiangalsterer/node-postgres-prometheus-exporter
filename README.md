@@ -13,6 +13,7 @@
 A prometheus exporter exposing metrics for [node-postgres](https://node-postgres.com/).
 
 ## Available Metrics
+
 The exporter provides the following metrics.
 
 ### pg.Client Metrics
@@ -156,7 +157,7 @@ await pool.connect()
 
 # Configuration
 
-The exporter can be configured via properties specified on the optional parameter of type 
+The exporter can be configured via properties specified on the optional parameter of type
 _PgClientExporterOptions_  and _PgPoolExporterOptions_ respectively.
 
 ## PgClientExporterOptions
@@ -186,6 +187,7 @@ Here an example for node-postgres pool metrics:
 The changes to project can be found in the [changelog](/CHANGELOG.md).
 
 # Compatibility
+
 The following table list the compatibility of exporter versions with different node-postgres and prom-client versions.
 
 |Exporter Version|node-postgres Version|prom-client version|

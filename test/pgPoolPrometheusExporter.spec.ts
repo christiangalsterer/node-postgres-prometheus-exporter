@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from '@jest/globals'
+import { Pool } from 'pg'
 import { Registry } from 'prom-client'
 
-import { Pool } from 'pg'
 import { PgPoolPrometheusExporter } from '../src/pgPoolPrometheusExporter'
 
 describe('tests PgPoolPrometheusExporter', () => {

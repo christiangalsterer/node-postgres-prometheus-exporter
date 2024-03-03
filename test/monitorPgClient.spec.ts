@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, jest, test } from '@jest/globals'
+import { type Client } from 'pg'
 import { Registry } from 'prom-client'
 
-import { type Client } from 'pg'
 import { monitorPgClient } from '../src/monitorPgClient'
 import { PgClientPrometheusExporter } from '../src/pgClientPrometheusExporter'
 

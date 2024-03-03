@@ -1,4 +1,5 @@
 import { describe, expect, test } from '@jest/globals'
+
 import { getDatabase, getHost, getMaxPoolSize, getPort, mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels } from '../src/utils'
 
 describe('tests mergeLabelNamesWithStandardLabels', () => {

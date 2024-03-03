@@ -1,5 +1,6 @@
 import { type Pool, type PoolClient } from 'pg'
 import { Counter, Gauge, type Registry } from 'prom-client'
+
 import { type PgPoolExporterOptions } from './pgPoolExporterOptions'
 import { getDatabase, getHost, getMaxPoolSize, getPort, mergeLabelNamesWithStandardLabels, mergeLabelsWithStandardLabels } from './utils'
 

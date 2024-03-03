@@ -2,6 +2,7 @@
 import { beforeEach } from '@jest/globals'
 import { Pool } from 'pg'
 import { Counter, Gauge, type Registry } from 'prom-client'
+
 import { PgPoolPrometheusExporter } from '../src/pgPoolPrometheusExporter'
 
 jest.mock('prom-client', () => ({

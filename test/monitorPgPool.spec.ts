@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, jest, test } from '@jest/globals'
+import { type Pool } from 'pg'
 import { Registry } from 'prom-client'
 
-import { type Pool } from 'pg'
 import { monitorPgPool } from '../src/monitorPgPool'
 import { PgPoolPrometheusExporter } from '../src/pgPoolPrometheusExporter'
 

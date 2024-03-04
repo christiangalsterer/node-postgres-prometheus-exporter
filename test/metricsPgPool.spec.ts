@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { beforeEach } from '@jest/globals'
 import { Pool } from 'pg'
 import { Counter, Gauge, type Registry } from 'prom-client'
@@ -22,6 +21,7 @@ jest.mock('prom-client', () => ({
 
 describe('test if all metrics are created with the correct parameters', () => {
   const options = { defaultLabels: { foo: 'bar', alice: 2 } }
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const register: Registry = {} as Registry
   const pool = new Pool()
 

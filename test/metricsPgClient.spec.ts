@@ -14,7 +14,7 @@ jest.mock('prom-client', () => ({
   })
 }))
 
-describe('test if all client metrics are created with the correct parameters', () => {
+describe('client metrics are created with the correct parameters', () => {
   const options = { defaultLabels: { foo: 'bar', alice: 2 } }
   const register: Registry = {} as Registry
   const client = new Client()
@@ -23,7 +23,7 @@ describe('test if all client metrics are created with the correct parameters', (
     jest.clearAllMocks()
   })
 
-  test('tests if all client metrics are created', () => {
+  test('client metrics are created', () => {
     // eslint-disable-next-line no-new
     new PgClientPrometheusExporter(client, register)
 
@@ -44,7 +44,7 @@ describe('test if all client metrics are created with the correct parameters', (
     })
   })
 
-  test('tests if all client metrics are created with default labels', () => {
+  test('client metrics are created with default labels', () => {
     // eslint-disable-next-line no-new
     new PgClientPrometheusExporter(client, register, options)
 

@@ -17,20 +17,20 @@ describe('tests monitorPgPool', () => {
     mockPgPoolPrometheusExporter.mockClear()
   })
 
-  test('tests if monitorPgPool called PgPoolPrometheusExporter with mandatory parameter', () => {
+  test('monitorPgPool calls PgPoolPrometheusExporter with mandatory parameter', () => {
     monitorPgPool(pool, register)
     expect(mockPgPoolPrometheusExporter).toHaveBeenCalledTimes(1)
     expect(mockPgPoolPrometheusExporter).toHaveBeenCalledWith(pool, register, undefined)
   })
 
-  test('tests if monitorPgPool called PgPoolPrometheusExporter with optional parameter', () => {
+  test('monitorPgPool calls PgPoolPrometheusExporter with optional parameter', () => {
     const options = { defaultLabels: { foo: 'bar', alice: 2 } }
     monitorPgPool(pool, register, options)
     expect(mockPgPoolPrometheusExporter).toHaveBeenCalledTimes(1)
     expect(mockPgPoolPrometheusExporter).toHaveBeenCalledWith(pool, register, options)
   })
 
-  test('tests if monitorPgPool called methods of PgPoolPrometheusExporter instance', () => {
+  test('monitorPgPool calls methods of PgPoolPrometheusExporter instance', () => {
     monitorPgPool(pool, register)
     const mockPgPoolPrometheusExporterInstance = mockPgPoolPrometheusExporter.mock.instances[0]
     // eslint-disable-next-line jest/unbound-method

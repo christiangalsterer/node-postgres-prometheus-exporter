@@ -19,7 +19,7 @@ jest.mock('prom-client', () => ({
   })
 }))
 
-describe('test if all metrics are created with the correct parameters', () => {
+describe('metrics are created with the correct parameters', () => {
   const options = { defaultLabels: { foo: 'bar', alice: 2 } }
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const register: Registry = {} as Registry
@@ -29,7 +29,7 @@ describe('test if all metrics are created with the correct parameters', () => {
     jest.clearAllMocks()
   })
 
-  test('tests if all pool metrics are created', () => {
+  test('all pool metrics are created', () => {
     // eslint-disable-next-line no-new
     new PgPoolPrometheusExporter(pool, register)
 
@@ -93,7 +93,7 @@ describe('test if all metrics are created with the correct parameters', () => {
     })
   })
 
-  test('tests if all pool metrics are created with default labels', () => {
+  test('pool metrics are created with default labels', () => {
     // eslint-disable-next-line no-new
     new PgPoolPrometheusExporter(pool, register, options)
 

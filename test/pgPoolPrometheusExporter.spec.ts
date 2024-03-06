@@ -17,7 +17,7 @@ describe('tests PgPoolPrometheusExporter', () => {
     register = new Registry()
   })
 
-  test('test if all metrics are registered in registry', () => {
+  test('if all metrics are registered in registry', () => {
     // eslint-disable-next-line no-new
     new PgPoolPrometheusExporter(pool, register)
     expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
@@ -26,7 +26,7 @@ describe('tests PgPoolPrometheusExporter', () => {
     })
   })
 
-  test('test if all metrics are registered in registry with defaultLabels', () => {
+  test('if all metrics are registered in registry with defaultLabels', () => {
     const options = { defaultLabels: { foo: 'bar', alice: 2 } }
     // eslint-disable-next-line no-new
     new PgPoolPrometheusExporter(pool, register, options)

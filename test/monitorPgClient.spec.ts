@@ -20,14 +20,14 @@ describe('tests monitorPgClient', () => {
   test('tests if monitorPgClient called PgClientPrometheusExporter with mandatory parameter', () => {
     monitorPgClient(client, register)
     expect(mockPgClientPrometheusExporter).toHaveBeenCalledTimes(1)
-    expect(mockPgClientPrometheusExporter).toBeCalledWith(client, register, undefined)
+    expect(mockPgClientPrometheusExporter).toHaveBeenCalledWith(client, register, undefined)
   })
 
   test('tests if monitorPgClient called PgClientPrometheusExporter with optional parameter', () => {
     const options = { defaultLabels: { foo: 'bar', alice: 2 } }
     monitorPgClient(client, register, options)
     expect(mockPgClientPrometheusExporter).toHaveBeenCalledTimes(1)
-    expect(mockPgClientPrometheusExporter).toBeCalledWith(client, register, options)
+    expect(mockPgClientPrometheusExporter).toHaveBeenCalledWith(client, register, options)
   })
 
   test('tests if monitorPgClient called methods of PgClientPrometheusExporter instance', () => {

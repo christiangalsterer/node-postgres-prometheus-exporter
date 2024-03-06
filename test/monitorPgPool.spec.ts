@@ -20,14 +20,14 @@ describe('tests monitorPgPool', () => {
   test('tests if monitorPgPool called PgPoolPrometheusExporter with mandatory parameter', () => {
     monitorPgPool(pool, register)
     expect(mockPgPoolPrometheusExporter).toHaveBeenCalledTimes(1)
-    expect(mockPgPoolPrometheusExporter).toBeCalledWith(pool, register, undefined)
+    expect(mockPgPoolPrometheusExporter).toHaveBeenCalledWith(pool, register, undefined)
   })
 
   test('tests if monitorPgPool called PgPoolPrometheusExporter with optional parameter', () => {
     const options = { defaultLabels: { foo: 'bar', alice: 2 } }
     monitorPgPool(pool, register, options)
     expect(mockPgPoolPrometheusExporter).toHaveBeenCalledTimes(1)
-    expect(mockPgPoolPrometheusExporter).toBeCalledWith(pool, register, options)
+    expect(mockPgPoolPrometheusExporter).toHaveBeenCalledWith(pool, register, options)
   })
 
   test('tests if monitorPgPool called methods of PgPoolPrometheusExporter instance', () => {

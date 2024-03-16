@@ -1,4 +1,5 @@
 [![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/christiangalsterer/node-postgres-prometheus-exporter/build.yaml)](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/actions/workflows/build.yaml)
+[![Coverage Status](https://coveralls.io/repos/github/christiangalsterer/node-postgres-prometheus-exporter/badge.svg?branch=main)](https://coveralls.io/github/christiangalsterer/node-postgres-prometheus-exporter?branch=main)
 [![Known Vulnerabilities](https://snyk.io/test/github/christiangalsterer/node-postgres-prometheus-exporter/badge.svg)](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/security/advisories)
 [![npm downloads](https://img.shields.io/npm/dt/@christiangalsterer/node-postgres-prometheus-exporter.svg)](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter)
 [![npm version](https://img.shields.io/npm/v/@christiangalsterer/node-postgres-prometheus-exporter.svg)](https://www.npmjs.com/package/@christiangalsterer/node-postgres-prometheus-exporter?activeTab=versions)
@@ -204,6 +205,6 @@ If you want to support this project, please add a link to your project and/or co
 
 # Related Projects
 
-If you are looking for a way to monitor your MongoDB Driver for Node.js you may have a look at https://github.com/christiangalsterer/mongodb-driver-prometheus-exporter.
+If you are looking for a way to monitor your MongoDB Driver for Node.js you may have a look at <https://github.com/christiangalsterer/mongodb-driver-prometheus-exporter>.
 
-If you are looking for a way to monitor KafkaJs for Node.js you may have a look at https://github.com/christiangalsterer/kafkajs-prometheus-exporter.
+If you are looking for a way to monitor KafkaJs for Node.js you may have a look at <https://github.com/christiangalsterer/kafkajs-prometheus-exporter>.

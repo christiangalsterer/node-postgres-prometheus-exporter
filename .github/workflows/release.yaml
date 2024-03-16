@@ -9,6 +9,6 @@ permissions:
   pull-requests: write
 
 jobs:
-  ci:
+  release:
     uses:
       christiangalsterer/github-actions/.github/workflows/node_release.yaml@main

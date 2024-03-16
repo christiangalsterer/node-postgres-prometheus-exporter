@@ -3,13 +3,11 @@
     "extends": [
         "config:js-lib",
         "schedule:nonOfficeHours",
-        "schedule:automergeNonOfficeHours"    
+        "schedule:automergeNonOfficeHours"
     ],
     "addLabels": [
         "renovate"
     ],
-    "semanticCommitScope": "",
-    "semanticCommitType": "build",
     "timezone": "Europe/Berlin",
     "packageRules": [
         {
@@ -19,7 +17,7 @@
                 "devDependencies"
             ],
             "matchUpdateTypes": [
-                "minor",  
+                "minor",
                 "patch",
                 "pin"
             ],

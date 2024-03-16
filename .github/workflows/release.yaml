@@ -1,0 +1,13 @@
+name: Release
+on:
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses:
+      christiangalsterer/github-actions/.github/workflows/node_release.yaml@main

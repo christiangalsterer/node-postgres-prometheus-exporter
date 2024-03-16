@@ -13,4 +13,4 @@ jobs:
   coveralls:
     uses:
       christiangalsterer/github-actions/.github/workflows/node_coveralls.yaml@main
-    secrets: inherit  
+    secrets: inherit

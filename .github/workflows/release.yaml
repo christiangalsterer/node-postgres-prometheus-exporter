@@ -12,3 +12,4 @@ jobs:
   release:
     uses:
       christiangalsterer/github-actions/.github/workflows/node_release.yaml@main
+    secrets: inherit  

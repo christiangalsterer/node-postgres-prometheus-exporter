@@ -37,7 +37,6 @@
     "prometheus",
     "monitoring",
     "metrics",
-    "opentelemetry",
     "pg prometheus",
     "pg monitoring",
     "pg metrics",

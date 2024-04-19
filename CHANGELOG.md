@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/compare/v1.1.0...v1.2.0) (2024-04-19)
+
+
+### Features
+
+* add support for auto rebase pull requests ([f53616a](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/commit/f53616a59e1730df4b5673fbfa14740a0264f37c))
+
 ## [1.1.0](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/compare/v1.0.0...v1.1.0) (2024-04-18)
 
 

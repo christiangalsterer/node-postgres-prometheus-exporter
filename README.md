@@ -1,4 +1,4 @@
-[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/christiangalsterer/node-postgres-prometheus-exporter/build.yaml)](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/actions/workflows/build.yaml)
+[![GitHub Actions CI Status](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/actions/workflows/build.yaml/badge.svg)](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/actions/workflows/build.yaml)
 [![codecov](https://codecov.io/gh/christiangalsterer/node-postgres-prometheus-exporter/graph/badge.svg?token=2KFRFMXSGS)](https://codecov.io/gh/christiangalsterer/node-postgres-prometheus-exporter)
 [![Coverage Status](https://coveralls.io/repos/github/christiangalsterer/node-postgres-prometheus-exporter/badge.svg?branch=main)](https://coveralls.io/github/christiangalsterer/node-postgres-prometheus-exporter?branch=main)
 [![Known Vulnerabilities](https://snyk.io/test/github/christiangalsterer/node-postgres-prometheus-exporter/badge.svg)](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/security/advisories)

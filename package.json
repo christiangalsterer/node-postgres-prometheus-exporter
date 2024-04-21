@@ -26,8 +26,8 @@
     "release:major": "npm run release:prepare && npm version major -m 'build(release): release %s' && git push && git push --tags",
     "release:minor": "npm run release:prepare && npm version minor -m 'build(release): release %s' && git push && git push --tags",
     "release:patch": "npm run release:prepare && npm version patch -m 'build(release): release %s' && git push && git push --tags",
-    "publish-npm": "npm publish --access=public",
-    "publish-npm:dry-run": "npm publish --access=public --dry-run",
+    "publish-npm": "npm run ci && npm publish --access=public",
+    "publish-npm:dry-run": "npm run ci && npm publish --access=public --dry-run",
     "renovate:config": "npx renovate-config-validator"
   },
   "keywords": [

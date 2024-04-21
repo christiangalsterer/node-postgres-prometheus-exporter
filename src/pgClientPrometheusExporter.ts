@@ -42,10 +42,10 @@ export class PgClientPrometheusExporter {
   }
 
   onClientError (_error: Error): void {
-    this.clientErrors.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port, database: this.client.database! }, this.options.defaultLabels))
+    this.clientErrors.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! }, this.options.defaultLabels))
   }
 
   onClientEnd (): void {
-    this.clientDisconnects.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port, database: this.client.database! }, this.options.defaultLabels))
+    this.clientDisconnects.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! }, this.options.defaultLabels))
   }
 }

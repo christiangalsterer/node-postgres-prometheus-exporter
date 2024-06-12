@@ -10,7 +10,7 @@ import { PgPoolPrometheusExporter } from './pgPoolPrometheusExporter'
  * @param client The pg pool to monitor.
  * @param options Optional parameter to configure the exporter
  */
-export function monitorPgPool (pool: Pool, register: Registry, options?: PgPoolExporterOptions): void {
+export function monitorPgPool(pool: Pool, register: Registry, options?: PgPoolExporterOptions): void {
   const exporter = new PgPoolPrometheusExporter(pool, register, options)
   exporter.enableMetrics()
 }

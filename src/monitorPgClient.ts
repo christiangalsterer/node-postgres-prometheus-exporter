@@ -10,7 +10,7 @@ import { PgClientPrometheusExporter } from './pgClientPrometheusExporter'
  * @param client The pg client to monitor.
  * @param options Optional parameter to configure the exporter
  */
-export function monitorPgClient (client: Client, register: Registry, options?: PgClientExporterOptions): void {
+export function monitorPgClient(client: Client, register: Registry, options?: PgClientExporterOptions): void {
   const exporter = new PgClientPrometheusExporter(client, register, options)
   exporter.enableMetrics()
 }

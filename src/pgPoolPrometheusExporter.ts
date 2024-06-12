@@ -27,7 +27,7 @@ export class PgPoolPrometheusExporter {
   private readonly poolWaitingConnections: Gauge
   private readonly poolIdleConnections: Gauge
 
-  constructor (pool: Pool, register: Registry, options?: PgPoolExporterOptions) {
+  constructor(pool: Pool, register: Registry, options?: PgPoolExporterOptions) {
     this.pool = pool
     this.register = register
     this.options = { ...this.defaultOptions, ...options }
@@ -52,7 +52,13 @@ export class PgPoolPrometheusExporter {
       labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
       registers: [this.register],
       collect: () => {
-        this.poolSizeMax.set(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels), this.poolMaxSize!)
+        this.poolSizeMax.set(
+          mergeLabelsWithStandardLabels(
+            { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+            this.options.defaultLabels
+          ),
+          this.poolMaxSize!
+        )
       }
     })
 
@@ -69,7 +75,13 @@ export class PgPoolPrometheusExporter {
       labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
       registers: [this.register],
       collect: () => {
-        this.poolWaitingConnections.set(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels), this.pool.waitingCount)
+        this.poolWaitingConnections.set(
+          mergeLabelsWithStandardLabels(
+            { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+            this.options.defaultLabels
+          ),
+          this.pool.waitingCount
+        )
       }
     })
 
@@ -79,7 +91,13 @@ export class PgPoolPrometheusExporter {
       labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
       registers: [this.register],
       collect: () => {
-        this.poolIdleConnections.set(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels), this.pool.idleCount)
+        this.poolIdleConnections.set(
+          mergeLabelsWithStandardLabels(
+            { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+            this.options.defaultLabels
+          ),
+          this.pool.idleCount
+        )
       }
     })
 
@@ -103,33 +121,60 @@ export class PgPoolPrometheusExporter {
     this.poolDatabase = getDatabase(pool)
   }
 
-  public enableMetrics (): void {
-    this.pool.on('connect', client => { this.onPoolConnect(client) })
-    this.pool.on('acquire', client => { this.onPoolConnectionAcquired(client) })
-    this.pool.on('error', error => { this.onPoolError(error) })
-    this.pool.on('release', (error, client) => { this.onPoolConnectionReleased(error, client) })
-    this.pool.on('remove', client => { this.onPoolConnectionRemoved(client) })
+  public enableMetrics(): void {
+    this.pool.on('connect', (client) => {
+      this.onPoolConnect(client)
+    })
+    this.pool.on('acquire', (client) => {
+      this.onPoolConnectionAcquired(client)
+    })
+    this.pool.on('error', (error) => {
+      this.onPoolError(error)
+    })
+    this.pool.on('release', (error, client) => {
+      this.onPoolConnectionReleased(error, client)
+    })
+    this.pool.on('remove', (client) => {
+      this.onPoolConnectionRemoved(client)
+    })
   }
 
-  onPoolConnect (client: PoolClient): void {
-    this.poolConnectionsCreatedTotal.inc(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels))
-    this.poolSize.inc(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels))
+  onPoolConnect(client: PoolClient): void {
+    this.poolConnectionsCreatedTotal.inc(
+      mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels)
+    )
+    this.poolSize.inc(
+      mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels)
+    )
   }
 
-  onPoolConnectionAcquired (client: PoolClient): void {
-    this.poolActiveConnections.inc(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels))
+  onPoolConnectionAcquired(client: PoolClient): void {
+    this.poolActiveConnections.inc(
+      mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels)
+    )
   }
 
-  onPoolError (error: Error): void {
-    this.poolErrors.inc(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase, error: error.message }, this.options.defaultLabels))
+  onPoolError(error: Error): void {
+    this.poolErrors.inc(
+      mergeLabelsWithStandardLabels(
+        { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase, error: error.message },
+        this.options.defaultLabels
+      )
+    )
   }
 
-  onPoolConnectionReleased (_error: Error, client: PoolClient): void {
-    this.poolActiveConnections.dec(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels))
+  onPoolConnectionReleased(_error: Error, client: PoolClient): void {
+    this.poolActiveConnections.dec(
+      mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels)
+    )
   }
 
-  onPoolConnectionRemoved (client: PoolClient): void {
-    this.poolSize.dec(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels))
-    this.poolConnectionsRemovedTotal.inc(mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels))
+  onPoolConnectionRemoved(client: PoolClient): void {
+    this.poolSize.dec(
+      mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels)
+    )
+    this.poolConnectionsRemovedTotal.inc(
+      mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels)
+    )
   }
 }

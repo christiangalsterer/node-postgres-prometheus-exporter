@@ -11,5 +11,4 @@ permissions:
 
 jobs:
   coveralls:
-    uses:
-      christiangalsterer/github-actions/.github/workflows/node_coveralls.yaml@main
+    uses: christiangalsterer/github-actions/.github/workflows/node_coveralls.yaml@main

@@ -1,0 +1,5 @@
+**/*.md
+.vscode
+coverage
+dist
+docs

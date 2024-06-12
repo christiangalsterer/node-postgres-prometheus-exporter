@@ -16,7 +16,7 @@ export class PgClientPrometheusExporter {
   private readonly clientErrors: Counter
   private readonly clientDisconnects: Counter
 
-  constructor (client: Client, register: Registry, options?: PgClientExporterOptions) {
+  constructor(client: Client, register: Registry, options?: PgClientExporterOptions) {
     this.client = client
     this.register = register
     this.options = { ...this.defaultOptions, ...options }
@@ -36,16 +36,30 @@ export class PgClientPrometheusExporter {
     })
   }
 
-  public enableMetrics (): void {
-    this.client.on('error', error => { this.onClientError(error) })
-    this.client.on('end', () => { this.onClientEnd() })
+  public enableMetrics(): void {
+    this.client.on('error', (error) => {
+      this.onClientError(error)
+    })
+    this.client.on('end', () => {
+      this.onClientEnd()
+    })
   }
 
-  onClientError (_error: Error): void {
-    this.clientErrors.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! }, this.options.defaultLabels))
+  onClientError(_error: Error): void {
+    this.clientErrors.inc(
+      mergeLabelsWithStandardLabels(
+        { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! },
+        this.options.defaultLabels
+      )
+    )
   }
 
-  onClientEnd (): void {
-    this.clientDisconnects.inc(mergeLabelsWithStandardLabels({ host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! }, this.options.defaultLabels))
+  onClientEnd(): void {
+    this.clientDisconnects.inc(
+      mergeLabelsWithStandardLabels(
+        { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! },
+        this.options.defaultLabels
+      )
+    )
   }
 }

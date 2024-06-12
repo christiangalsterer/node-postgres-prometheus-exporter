@@ -7,9 +7,7 @@ import { PgClientPrometheusExporter } from '../src/pgClientPrometheusExporter'
 describe('tests pgClientPrometheusExporter', () => {
   let register: Registry
   const client = new Client()
-  const metrics: string[] = [
-    'pg_client_errors_total', 'pg_client_disconnects_total'
-  ]
+  const metrics: string[] = ['pg_client_errors_total', 'pg_client_disconnects_total']
 
   beforeEach(() => {
     register = new Registry()
@@ -19,7 +17,7 @@ describe('tests pgClientPrometheusExporter', () => {
     // eslint-disable-next-line no-new
     new PgClientPrometheusExporter(client, register)
     expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
-    metrics.forEach(metric => {
+    metrics.forEach((metric) => {
       expect(register.getSingleMetric(metric)).toBeDefined()
     })
   })
@@ -29,7 +27,7 @@ describe('tests pgClientPrometheusExporter', () => {
     // eslint-disable-next-line no-new
     new PgClientPrometheusExporter(client, register, options)
     expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
-    metrics.forEach(metric => {
+    metrics.forEach((metric) => {
       expect(register.getSingleMetric(metric)).toBeDefined()
     })
   })

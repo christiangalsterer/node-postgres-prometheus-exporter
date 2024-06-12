@@ -8,9 +8,14 @@ describe('tests PgPoolPrometheusExporter', () => {
   let register: Registry
   const pool = new Pool()
   const metrics: string[] = [
-    'pg_pool_connections_created_total', 'pg_pool_size', 'pg_pool_max',
-    'pg_pool_active_connections', 'pg_pool_waiting_connections', 'pg_pool_idle_connections',
-    'pg_pool_errors_total', 'pg_pool_connections_removed_total'
+    'pg_pool_connections_created_total',
+    'pg_pool_size',
+    'pg_pool_max',
+    'pg_pool_active_connections',
+    'pg_pool_waiting_connections',
+    'pg_pool_idle_connections',
+    'pg_pool_errors_total',
+    'pg_pool_connections_removed_total'
   ]
 
   beforeEach(() => {
@@ -21,7 +26,7 @@ describe('tests PgPoolPrometheusExporter', () => {
     // eslint-disable-next-line no-new
     new PgPoolPrometheusExporter(pool, register)
     expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
-    metrics.forEach(metric => {
+    metrics.forEach((metric) => {
       expect(register.getSingleMetric(metric)).toBeDefined()
     })
   })
@@ -31,7 +36,7 @@ describe('tests PgPoolPrometheusExporter', () => {
     // eslint-disable-next-line no-new
     new PgPoolPrometheusExporter(pool, register, options)
     expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
-    metrics.forEach(metric => {
+    metrics.forEach((metric) => {
       expect(register.getSingleMetric(metric)).toBeDefined()
     })
   })

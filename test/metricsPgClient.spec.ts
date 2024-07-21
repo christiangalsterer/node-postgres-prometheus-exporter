@@ -21,6 +21,7 @@ describe('client metrics are created with the correct parameters', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
+    register.getSingleMetric = jest.fn(() => undefined)
   })
 
   test('client metrics are created', () => {

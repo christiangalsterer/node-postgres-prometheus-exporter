@@ -27,6 +27,7 @@ describe('metrics are created with the correct parameters', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
+    register.getSingleMetric = jest.fn(() => undefined)
   })
 
   test('all pool metrics are created', () => {

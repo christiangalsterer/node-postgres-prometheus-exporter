@@ -31,4 +31,15 @@ describe('tests pgClientPrometheusExporter', () => {
       expect(register.getSingleMetric(metric)).toBeDefined()
     })
   })
+
+  test('metrics are registered only once and taken from the registry', () => {
+    // eslint-disable-next-line no-new
+    new PgClientPrometheusExporter(client, register)
+    // eslint-disable-next-line no-new
+    new PgClientPrometheusExporter(client, register)
+    expect(register.getMetricsAsArray()).toHaveLength(metrics.length)
+    metrics.forEach((metric) => {
+      expect(register.getSingleMetric(metric)).toBeDefined()
+    })
+  })
 })

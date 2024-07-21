@@ -18,6 +18,15 @@ export class PgPoolPrometheusExporter {
   private readonly poolPort: number
   private readonly poolDatabase: string | undefined
 
+  private readonly PG_POOL_CONNECTIONS_CREATED_TOTAL = 'pg_pool_connections_created_total'
+  private readonly PG_POOL_SIZE = 'pg_pool_size'
+  private readonly PG_POOL_MAX = 'pg_pool_max'
+  private readonly PG_POOL_ACTIVE_CONNECTIONS = 'pg_pool_active_connections'
+  private readonly PG_POOL_WAITING_CONNECTIONS = 'pg_pool_waiting_connections'
+  private readonly PG_POOL_IDLE_CONNECTIONS = 'pg_pool_idle_connections'
+  private readonly PG_POOL_ERRORS_TOTAL = 'pg_pool_errors_total'
+  private readonly PG_POOL_CONNECTIONS_REMOVED_TOTAL = 'pg_pool_connections_removed_total'
+
   private readonly poolConnectionsCreatedTotal: Counter
   private readonly poolSize: Gauge
   private readonly poolSizeMax: Gauge
@@ -32,88 +41,96 @@ export class PgPoolPrometheusExporter {
     this.register = register
     this.options = { ...this.defaultOptions, ...options }
 
-    this.poolConnectionsCreatedTotal = new Counter({
-      name: 'pg_pool_connections_created_total',
-      help: 'The total number of created connections.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-      registers: [this.register]
-    })
+    this.poolConnectionsCreatedTotal = (this.register.getSingleMetric(this.PG_POOL_CONNECTIONS_CREATED_TOTAL) ??
+      new Counter({
+        name: this.PG_POOL_CONNECTIONS_CREATED_TOTAL,
+        help: 'The total number of created connections.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+        registers: [this.register]
+      })) as Counter
 
-    this.poolSize = new Gauge({
-      name: 'pg_pool_size',
-      help: 'The current size of the connection pool, including active and idle members.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-      registers: [this.register]
-    })
+    this.poolSize = (this.register.getSingleMetric(this.PG_POOL_SIZE) ??
+      new Gauge({
+        name: this.PG_POOL_SIZE,
+        help: 'The current size of the connection pool, including active and idle members.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+        registers: [this.register]
+      })) as Gauge
 
-    this.poolSizeMax = new Gauge({
-      name: 'pg_pool_max',
-      help: 'The maximum size of the connection pool.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-      registers: [this.register],
-      collect: () => {
-        this.poolSizeMax.set(
-          mergeLabelsWithStandardLabels(
-            { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
-            this.options.defaultLabels
-          ),
-          this.poolMaxSize!
-        )
-      }
-    })
+    this.poolSizeMax = (this.register.getSingleMetric(this.PG_POOL_MAX) ??
+      new Gauge({
+        name: this.PG_POOL_MAX,
+        help: 'The maximum size of the connection pool.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+        registers: [this.register],
+        collect: () => {
+          this.poolSizeMax.set(
+            mergeLabelsWithStandardLabels(
+              { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+              this.options.defaultLabels
+            ),
+            this.poolMaxSize!
+          )
+        }
+      })) as Gauge
 
-    this.poolActiveConnections = new Gauge({
-      name: 'pg_pool_active_connections',
-      help: 'The total number of active connections.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-      registers: [this.register]
-    })
+    this.poolActiveConnections = (this.register.getSingleMetric(this.PG_POOL_ACTIVE_CONNECTIONS) ??
+      new Gauge({
+        name: this.PG_POOL_ACTIVE_CONNECTIONS,
+        help: 'The total number of active connections.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+        registers: [this.register]
+      })) as Gauge
 
-    this.poolWaitingConnections = new Gauge({
-      name: 'pg_pool_waiting_connections',
-      help: 'The total number of waiting connections.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-      registers: [this.register],
-      collect: () => {
-        this.poolWaitingConnections.set(
-          mergeLabelsWithStandardLabels(
-            { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
-            this.options.defaultLabels
-          ),
-          this.pool.waitingCount
-        )
-      }
-    })
+    this.poolWaitingConnections = (this.register.getSingleMetric(this.PG_POOL_WAITING_CONNECTIONS) ??
+      new Gauge({
+        name: this.PG_POOL_WAITING_CONNECTIONS,
+        help: 'The total number of waiting connections.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+        registers: [this.register],
+        collect: () => {
+          this.poolWaitingConnections.set(
+            mergeLabelsWithStandardLabels(
+              { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+              this.options.defaultLabels
+            ),
+            this.pool.waitingCount
+          )
+        }
+      })) as Gauge
 
-    this.poolIdleConnections = new Gauge({
-      name: 'pg_pool_idle_connections',
-      help: 'The total number of idle connections.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-      registers: [this.register],
-      collect: () => {
-        this.poolIdleConnections.set(
-          mergeLabelsWithStandardLabels(
-            { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
-            this.options.defaultLabels
-          ),
-          this.pool.idleCount
-        )
-      }
-    })
+    this.poolIdleConnections = (this.register.getSingleMetric(this.PG_POOL_IDLE_CONNECTIONS) ??
+      new Gauge({
+        name: this.PG_POOL_IDLE_CONNECTIONS,
+        help: 'The total number of idle connections.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+        registers: [this.register],
+        collect: () => {
+          this.poolIdleConnections.set(
+            mergeLabelsWithStandardLabels(
+              { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+              this.options.defaultLabels
+            ),
+            this.pool.idleCount
+          )
+        }
+      })) as Gauge
 
-    this.poolErrors = new Counter({
-      name: 'pg_pool_errors_total',
-      help: 'The total number of connection errors with a database.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database', 'error'], this.options.defaultLabels),
-      registers: [this.register]
-    })
+    this.poolErrors = (this.register.getSingleMetric(this.PG_POOL_ERRORS_TOTAL) ??
+      new Counter({
+        name: this.PG_POOL_ERRORS_TOTAL,
+        help: 'The total number of connection errors with a database.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database', 'error'], this.options.defaultLabels),
+        registers: [this.register]
+      })) as Counter
 
-    this.poolConnectionsRemovedTotal = new Counter({
-      name: 'pg_pool_connections_removed_total',
-      help: 'The total number of removed connections.',
-      labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-      registers: [this.register]
-    })
+    this.poolConnectionsRemovedTotal = (this.register.getSingleMetric(this.PG_POOL_CONNECTIONS_REMOVED_TOTAL) ??
+      new Counter({
+        name: this.PG_POOL_CONNECTIONS_REMOVED_TOTAL,
+        help: 'The total number of removed connections.',
+        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+        registers: [this.register]
+      })) as Counter
 
     this.poolMaxSize = getMaxPoolSize(pool)
     this.poolHost = getHost(pool)

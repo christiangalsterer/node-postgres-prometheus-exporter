@@ -1,7 +1,7 @@
-import { type Client } from 'pg'
-import { type Registry } from 'prom-client'
+import type { Client } from 'pg'
+import type { Registry } from 'prom-client'
 
-import { type PgClientExporterOptions } from './pgClientExporterOptions'
+import type { PgClientExporterOptions } from './pgClientExporterOptions'
 import { PgClientPrometheusExporter } from './pgClientPrometheusExporter'
 
 /**

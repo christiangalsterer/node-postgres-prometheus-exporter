@@ -1,4 +1,4 @@
-import { type Pool } from 'pg'
+import type { Pool } from 'pg'
 
 /**
  * Merges an array of label names with the label names of the default labels into a new array.

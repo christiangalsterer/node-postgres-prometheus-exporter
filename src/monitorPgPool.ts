@@ -1,7 +1,7 @@
-import { type Pool } from 'pg'
-import { type Registry } from 'prom-client'
+import type { Pool } from 'pg'
+import type { Registry } from 'prom-client'
 
-import { type PgPoolExporterOptions } from './pgPoolExporterOptions'
+import type { PgPoolExporterOptions } from './pgPoolExporterOptions'
 import { PgPoolPrometheusExporter } from './pgPoolPrometheusExporter'
 
 /**

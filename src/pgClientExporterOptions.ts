@@ -1,4 +1,4 @@
-import { type PgExporterOptions } from './pgExporterOptions'
+import type { PgExporterOptions } from './pgExporterOptions'
 
 /**
  * Optional parameter to configure the exporter.

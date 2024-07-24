@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, jest, test } from '@jest/globals'
-import { type Pool } from 'pg'
+import type { Pool } from 'pg'
 import { Registry } from 'prom-client'
 
 import { monitorPgPool } from '../src/monitorPgPool'

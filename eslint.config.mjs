@@ -27,6 +27,7 @@ export default tseslint.config(
       tseslint
     },
     rules: {
+      '@typescript-eslint/no-magic-numbers': 'off',
       '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/init-declarations': 'off',
       'import/first': 'error',

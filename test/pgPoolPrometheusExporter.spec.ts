@@ -4,6 +4,8 @@ import { Registry } from 'prom-client'
 
 import { PgPoolPrometheusExporter } from '../src/pgPoolPrometheusExporter'
 
+const poolEvents: string[] = ['connect', 'acquire', 'error', 'release', 'remove']
+
 describe('tests PgPoolPrometheusExporter', () => {
   let register: Registry
   const pool = new Pool()
@@ -50,5 +52,24 @@ describe('tests PgPoolPrometheusExporter', () => {
     metrics.forEach((metric) => {
       expect(register.getSingleMetric(metric)).toBeDefined()
     })
+  })
+
+  test.each(poolEvents)('metrics are emitted with default labels for event "%s"', async (event) => {
+    pool.options.host = 'localhost'
+    pool.options.port = 5432
+    const options = { defaultLabels: { foo: 'bar', alice: 2 } }
+    const expectedLabels = { foo: 'bar', alice: 2 }
+    const exporter = new PgPoolPrometheusExporter(pool, register, options)
+    const mockEvent = {}
+    exporter.enableMetrics()
+    pool.emit(event, mockEvent)
+
+    const metrics = await register.getMetricsAsJSON()
+    for (const metric of metrics) {
+      for (const value of metric.values) {
+        console.log(value)
+        expect(value.labels).toMatchObject(expectedLabels)
+      }
+    }
   })
 })

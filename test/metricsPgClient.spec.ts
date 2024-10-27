@@ -6,12 +6,10 @@ import { Counter, type Registry } from 'prom-client'
 import { PgClientPrometheusExporter } from '../src/pgClientPrometheusExporter'
 
 jest.mock('prom-client', () => ({
-  Counter: jest.fn(() => {
-    return {
+  Counter: jest.fn(() => ({
       set: jest.fn(),
       get: jest.fn()
-    }
-  })
+    }))
 }))
 
 describe('client metrics are created with the correct parameters', () => {

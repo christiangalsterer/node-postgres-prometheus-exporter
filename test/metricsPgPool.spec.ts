@@ -6,13 +6,13 @@ import { PgPoolPrometheusExporter } from '../src/pgPoolPrometheusExporter'
 
 jest.mock('prom-client', () => ({
   Counter: jest.fn(() => ({
-      set: jest.fn(),
-      get: jest.fn()
-    })),
+    set: jest.fn(),
+    get: jest.fn()
+  })),
   Gauge: jest.fn(() => ({
-      set: jest.fn(),
-      get: jest.fn()
-    }))
+    set: jest.fn(),
+    get: jest.fn()
+  }))
 }))
 
 describe('metrics are created with the correct parameters', () => {

@@ -78,7 +78,6 @@ describe('tests getHost', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const definedHost: any = { options: { host: 'localhost' } }
 
-  
   test.skip('getHost with undefined pool', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     expect(getHost(undefinedPool)).toBeUndefined()

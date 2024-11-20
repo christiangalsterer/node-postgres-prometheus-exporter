@@ -23,21 +23,27 @@ export class PgClientPrometheusExporter {
     this.register = register
     this.options = { ...this.defaultOptions, ...options }
 
-    this.clientErrors = (this.register.getSingleMetric(this.PG_CLIENT_ERRORS_TOTAL) ??
-      new Counter({
-        name: this.PG_CLIENT_ERRORS_TOTAL,
-        help: 'The total number of connection errors with a database.',
-        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-        registers: [this.register]
-      })) as Counter
+    const clientErrorsMetric = this.register.getSingleMetric(this.PG_CLIENT_ERRORS_TOTAL)
+    this.clientErrors =
+      clientErrorsMetric instanceof Counter
+        ? clientErrorsMetric
+        : new Counter({
+            name: this.PG_CLIENT_ERRORS_TOTAL,
+            help: 'The total number of connection errors with a database.',
+            labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+            registers: [this.register]
+          })
 
-    this.clientDisconnects = (this.register.getSingleMetric(this.PG_CLIENT_DISCONNECTS_TOTAL) ??
-      new Counter({
-        name: this.PG_CLIENT_DISCONNECTS_TOTAL,
-        help: 'The total number of disconnected connections.',
-        labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
-        registers: [this.register]
-      })) as Counter
+    const clientDisconnectsMetric = this.register.getSingleMetric(this.PG_CLIENT_DISCONNECTS_TOTAL)
+    this.clientDisconnects =
+      clientDisconnectsMetric instanceof Counter
+        ? clientDisconnectsMetric
+        : new Counter({
+            name: this.PG_CLIENT_DISCONNECTS_TOTAL,
+            help: 'The total number of disconnected connections.',
+            labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
+            registers: [this.register]
+          })
   }
 
   public enableMetrics(): void {

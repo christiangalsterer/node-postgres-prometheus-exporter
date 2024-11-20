@@ -14,6 +14,7 @@ jest.mock('prom-client', () => ({
 
 describe('client metrics are created with the correct parameters', () => {
   const options = { defaultLabels: { foo: 'bar', alice: 2 } }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
   const register: Registry = {} as Registry
   const client = new Client()
 

@@ -34,8 +34,7 @@ export function mergeLabelsWithStandardLabels(
  * @returns the configured max pool size or undefined
  */
 export function getMaxPoolSize(pool: Pool): number | undefined {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-  return (pool as any).options?.max
+  return pool.options.max
 }
 
 /**
@@ -44,8 +43,7 @@ export function getMaxPoolSize(pool: Pool): number | undefined {
  * @returns the configured host or undefined
  */
 export function getHost(pool: Pool): string {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-  return (pool as any).options?.host
+  return pool.options.host ?? ''
 }
 
 /**
@@ -54,8 +52,8 @@ export function getHost(pool: Pool): string {
  * @returns the configured port or undefined
  */
 export function getPort(pool: Pool): number {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-  return (pool as any).options?.port
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+  return pool.options.port ?? 5432
 }
 
 /**
@@ -64,6 +62,5 @@ export function getPort(pool: Pool): number {
  * @returns the configured database or undefined
  */
 export function getDatabase(pool: Pool): string | undefined {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-  return (pool as any).options?.database
+  return pool.options.database
 }

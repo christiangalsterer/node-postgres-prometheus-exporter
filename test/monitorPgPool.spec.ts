@@ -9,7 +9,8 @@ jest.mock('../src/pgPoolPrometheusExporter')
 const mockPgPoolPrometheusExporter = jest.mocked(PgPoolPrometheusExporter)
 
 describe('tests monitorPgPool', () => {
-  let pool: Pool
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/consistent-type-assertions
+  const pool: Pool = {} as Pool
   let register: Registry
 
   beforeEach(() => {

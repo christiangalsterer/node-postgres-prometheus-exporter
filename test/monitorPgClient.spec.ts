@@ -9,7 +9,8 @@ jest.mock('../src/pgClientPrometheusExporter')
 const mockPgClientPrometheusExporter = jest.mocked(PgClientPrometheusExporter)
 
 describe('tests monitorPgClient', () => {
-  let client: Client
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-unsafe-type-assertion
+  const client: Client = {} as Client
   let register: Registry
 
   beforeEach(() => {

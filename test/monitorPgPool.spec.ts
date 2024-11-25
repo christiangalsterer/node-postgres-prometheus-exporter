@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, jest, test } from '@jest/globals'
-import type { Pool } from 'pg'
+import { Pool } from 'pg'
 import { Registry } from 'prom-client'
 
 import { monitorPgPool } from '../src/monitorPgPool'
@@ -9,8 +9,7 @@ jest.mock('../src/pgPoolPrometheusExporter')
 const mockPgPoolPrometheusExporter = jest.mocked(PgPoolPrometheusExporter)
 
 describe('tests monitorPgPool', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/consistent-type-assertions
-  const pool: Pool = {} as Pool
+  const pool: Pool = new Pool()
   let register: Registry
 
   beforeEach(() => {

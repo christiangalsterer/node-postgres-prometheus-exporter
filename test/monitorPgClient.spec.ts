@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, jest, test } from '@jest/globals'
-import type { Client } from 'pg'
+import { Client } from 'pg'
 import { Registry } from 'prom-client'
 
 import { monitorPgClient } from '../src/monitorPgClient'
@@ -9,8 +9,7 @@ jest.mock('../src/pgClientPrometheusExporter')
 const mockPgClientPrometheusExporter = jest.mocked(PgClientPrometheusExporter)
 
 describe('tests monitorPgClient', () => {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-unsafe-type-assertion
-  const client: Client = {} as Client
+  const client: Client = new Client()
   let register: Registry
 
   beforeEach(() => {

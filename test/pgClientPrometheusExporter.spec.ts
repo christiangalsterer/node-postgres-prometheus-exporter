@@ -56,7 +56,6 @@ describe('tests pgClientPrometheusExporter', () => {
     const metrics = await register.getMetricsAsJSON()
     for (const metric of metrics) {
       for (const value of metric.values) {
-        console.log(value)
         expect(value.labels).toMatchObject(expectedLabels)
       }
     }

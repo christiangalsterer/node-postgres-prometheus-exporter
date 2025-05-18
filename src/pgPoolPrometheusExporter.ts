@@ -14,7 +14,7 @@ export class PgPoolPrometheusExporter {
   private readonly defaultOptions: PgPoolExporterOptions = {}
 
   private readonly poolMaxSize: number | undefined
-  private readonly poolHost: string
+  private readonly poolHost: string | undefined
   private readonly poolPort: number
   private readonly poolDatabase: string | undefined
 
@@ -104,13 +104,15 @@ export class PgPoolPrometheusExporter {
             labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
             registers: [this.register],
             collect: () => {
-              this.poolWaitingConnections.set(
-                mergeLabelsWithStandardLabels(
-                  { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
-                  this.options.defaultLabels
-                ),
-                this.pool.waitingCount
-              )
+              if ((this.poolHost != null) && this.poolDatabase != null) {
+                this.poolWaitingConnections.set(
+                  mergeLabelsWithStandardLabels(
+                    { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+                    this.options.defaultLabels
+                  ),
+                  this.pool.waitingCount
+                )
+              }
             }
           })
 
@@ -124,13 +126,15 @@ export class PgPoolPrometheusExporter {
             labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
             registers: [this.register],
             collect: () => {
-              this.poolIdleConnections.set(
-                mergeLabelsWithStandardLabels(
-                  { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
-                  this.options.defaultLabels
-                ),
-                this.pool.idleCount
-              )
+              if ((this.poolHost != null) && this.poolDatabase != null) {
+                this.poolIdleConnections.set(
+                  mergeLabelsWithStandardLabels(
+                    { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+                    this.options.defaultLabels
+                  ),
+                  this.pool.idleCount
+                )
+              }
             }
           })
 
@@ -181,6 +185,7 @@ export class PgPoolPrometheusExporter {
   }
 
   onPoolConnect(client: PoolClient): void {
+    
     this.poolConnectionsCreatedTotal.inc(
       mergeLabelsWithStandardLabels({ host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase }, this.options.defaultLabels)
     )

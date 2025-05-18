@@ -42,14 +42,15 @@ export function getMaxPoolSize(pool: Pool): number | undefined {
  * @param pool the pool from which to get the property
  * @returns the configured host or undefined
  */
-export function getHost(pool: Pool): string {
-  return pool.options.host ?? ''
+export function getHost(pool: Pool): string | undefined {
+  return pool.options.host ?? undefined
 }
 
 /**
  * Tries to determine the port configuration from the pool via direct property access as the configuration is not exported
  * @param pool the pool from which to get the property
- * @returns the configured port or undefined
+ * @returns the configured port or 5432 if not set
+ * @see https://node-postgres.com/api/pool#pool-connection-parameters
  */
 export function getPort(pool: Pool): number {
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers

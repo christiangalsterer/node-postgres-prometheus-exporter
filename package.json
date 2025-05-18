@@ -1,6 +1,6 @@
 {
   "name": "@christiangalsterer/node-postgres-prometheus-exporter",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "A prometheus exporter for node-postgres",
   "repository": {
     "type": "git",

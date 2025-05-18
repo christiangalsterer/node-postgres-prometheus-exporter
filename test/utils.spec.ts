@@ -48,15 +48,15 @@ describe('tests mergeLabelsWithStandardLabels', () => {
 
 describe('tests getMaxPoolSize', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const undefinedPool: any = { options: undefined }
+  const undefinedOptions: any = { options: undefined }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const undefinedMax: any = { options: { max: undefined } }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const definedMax: any = { options: { max: 5 } }
 
-  test.skip('getMaxPoolSize with undefined pool', () => {
+  test.skip('getMaxPoolSize with undefined options', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    expect(getMaxPoolSize(undefinedPool)).toBeUndefined()
+    expect(getMaxPoolSize(undefinedOptions)).toBeUndefined()
   })
 
   test('getMaxPoolSize with undefined max', () => {
@@ -72,15 +72,15 @@ describe('tests getMaxPoolSize', () => {
 
 describe('tests getHost', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const undefinedPool: any = { options: undefined }
+  const undefinedOptions: any = { options: undefined }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const undefinedHost: any = { options: { host: undefined } }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const definedHost: any = { options: { host: 'localhost' } }
 
-  test.skip('getHost with undefined pool', () => {
+  test.skip('getHost with undefined options', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    expect(getHost(undefinedPool)).toBeUndefined()
+    expect(getHost(undefinedOptions)).toBeUndefined()
   })
 
   test.skip('getHost with undefined host', () => {
@@ -96,15 +96,15 @@ describe('tests getHost', () => {
 
 describe('tests getPort', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const undefinedPool: any = { options: undefined }
+  const undefinedOptions: any = { options: undefined }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const undefinedPort: any = { options: { port: undefined } }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const definedPort: any = { options: { port: 5432 } }
 
-  test.skip('getPort with undefined pool', () => {
+  test.skip('getPort with undefined options', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    expect(getPort(undefinedPool)).toBeUndefined()
+    expect(getPort(undefinedOptions)).toBeUndefined()
   })
 
   test.skip('getPort with undefined port', () => {
@@ -120,15 +120,15 @@ describe('tests getPort', () => {
 
 describe('tests getDatabase', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const undefinedPool: any = { options: undefined }
+  const undefinedOptions: any = { options: undefined }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const undefinedDatabase: any = { options: { database: undefined } }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const definedDatabase: any = { options: { database: 'database' } }
 
-  test.skip('getDatabase with undefined pool', () => {
+  test.skip('getDatabase with undefined options', () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    expect(getDatabase(undefinedPool)).toBeUndefined()
+    expect(getDatabase(undefinedOptions)).toBeUndefined()
   })
 
   test('getDatabase with undefined database', () => {

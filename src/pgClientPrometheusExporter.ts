@@ -56,20 +56,24 @@ export class PgClientPrometheusExporter {
   }
 
   onClientError(_error: Error): void {
-    this.clientErrors.inc(
-      mergeLabelsWithStandardLabels(
-        { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! },
-        this.options.defaultLabels
+    if (this.client.database != null) {
+      this.clientErrors.inc(
+        mergeLabelsWithStandardLabels(
+          { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database },
+          this.options.defaultLabels
+        )
       )
-    )
+    }
   }
 
   onClientEnd(): void {
-    this.clientDisconnects.inc(
-      mergeLabelsWithStandardLabels(
-        { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database! },
-        this.options.defaultLabels
+    if (this.client.database != null) {
+      this.clientDisconnects.inc(
+        mergeLabelsWithStandardLabels(
+          { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database },
+          this.options.defaultLabels
+        )
       )
-    )
+    }
   }
 }

@@ -73,13 +73,13 @@ export class PgPoolPrometheusExporter {
             labelNames: mergeLabelNamesWithStandardLabels(['host', 'database'], this.options.defaultLabels),
             registers: [this.register],
             collect: () => {
-              if (this.poolHost != null && this.poolDatabase != null) {
+              if (this.poolHost != null && this.poolDatabase != null && this.poolMaxSize != null) {
                 this.poolSizeMax.set(
                   mergeLabelsWithStandardLabels(
                     { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
                     this.options.defaultLabels
                   ),
-                  this.poolMaxSize!
+                  this.poolMaxSize
                 )
               }
             }

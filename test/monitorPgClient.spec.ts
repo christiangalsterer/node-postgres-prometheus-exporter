@@ -58,6 +58,4 @@ describe('tests monitorPgClient', () => {
     }).not.toThrow()
     expect(mockPgClientPrometheusExporter).toHaveBeenCalledTimes(3)
   })
-
-  
 })

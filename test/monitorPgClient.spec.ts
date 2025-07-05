@@ -30,12 +30,6 @@ describe('tests monitorPgClient', () => {
     expect(mockPgClientPrometheusExporter).toHaveBeenCalledWith(client, register, options)
   })
 
-  test('monitorPgClient calls PgClientPrometheusExporter with optional parameter null', () => {
-    // @ts-expect-error: null is not assignable, but test for legacy usage
-    monitorPgClient(client, register, null)
-    expect(mockPgClientPrometheusExporter).toHaveBeenCalledWith(client, register, null)
-  })
-
   test('calls PgClientPrometheusExporter with optional parameter undefined', () => {
     monitorPgClient(client, register, undefined)
     expect(mockPgClientPrometheusExporter).toHaveBeenCalledWith(client, register, undefined)

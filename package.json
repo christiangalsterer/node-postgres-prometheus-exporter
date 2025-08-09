@@ -64,9 +64,9 @@
     "eslint-plugin-simple-import-sort": "12.1.1",
     "jest": "30.0.5",
     "prettier": "3.6.2",
-    "renovate": "41.46.3",
-    "ts-jest": "29.4.0",
-    "typescript": "5.8.3"
+    "renovate": "41.60.3",
+    "ts-jest": "29.4.1",
+    "typescript": "5.9.2"
   },
   "engines": {
     "node": "20 || >=22"

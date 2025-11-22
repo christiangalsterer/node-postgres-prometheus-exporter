@@ -30,7 +30,7 @@ export default tseslint.config(
       '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/init-declarations': 'off',
       complexity: 'off',
-      'eqeqeq': ['error', 'always', { null: 'ignore' }],
+      eqeqeq: ['error', 'always', { null: 'ignore' }],
       'eslint-comments/require-description': 'off',
       'import/first': 'error',
       'import/newline-after-import': 'error',

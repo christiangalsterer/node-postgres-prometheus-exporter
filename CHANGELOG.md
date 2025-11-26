@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/compare/v1.3.1...v1.4.0) (2025-11-26)
+
+
+### Features
+
+* export pgPoolExporterOptions ([8d7eaf3](https://github.com/christiangalsterer/node-postgres-prometheus-exporter/commit/8d7eaf3f727197988a2c17feecc468f45b9a4a8c))
+
 ## 1.3.1 (2025-05-18)
 
 

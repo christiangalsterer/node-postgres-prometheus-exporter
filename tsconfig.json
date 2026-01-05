@@ -6,7 +6,8 @@
     "outDir": "./dist",
     "strictNullChecks": true,
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "skipLibCheck": true
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist/test", "dist/**/*.d.ts"]

@@ -76,7 +76,7 @@ export class PgPoolPrometheusExporter {
               if (this.poolHost != null && this.poolDatabase != null && this.poolMaxSize != null) {
                 this.poolSizeMax.set(
                   mergeLabelsWithStandardLabels(
-                    { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+                    { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
                     this.options.defaultLabels
                   ),
                   this.poolMaxSize
@@ -109,7 +109,7 @@ export class PgPoolPrometheusExporter {
               if (this.poolHost != null && this.poolDatabase != null) {
                 this.poolWaitingConnections.set(
                   mergeLabelsWithStandardLabels(
-                    { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+                    { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
                     this.options.defaultLabels
                   ),
                   this.pool.waitingCount
@@ -131,7 +131,7 @@ export class PgPoolPrometheusExporter {
               if (this.poolHost != null && this.poolDatabase != null) {
                 this.poolIdleConnections.set(
                   mergeLabelsWithStandardLabels(
-                    { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+                    { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
                     this.options.defaultLabels
                   ),
                   this.pool.idleCount
@@ -190,13 +190,13 @@ export class PgPoolPrometheusExporter {
     if (this.poolHost != null && this.poolDatabase != null) {
       this.poolConnectionsCreatedTotal.inc(
         mergeLabelsWithStandardLabels(
-          { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+          { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
           this.options.defaultLabels
         )
       )
       this.poolSize.inc(
         mergeLabelsWithStandardLabels(
-          { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+          { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
           this.options.defaultLabels
         )
       )
@@ -207,7 +207,7 @@ export class PgPoolPrometheusExporter {
     if (this.poolHost != null && this.poolDatabase != null) {
       this.poolActiveConnections.inc(
         mergeLabelsWithStandardLabels(
-          { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+          { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
           this.options.defaultLabels
         )
       )
@@ -218,7 +218,7 @@ export class PgPoolPrometheusExporter {
     if (this.poolHost != null && this.poolDatabase != null) {
       this.poolErrors.inc(
         mergeLabelsWithStandardLabels(
-          { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase, error: error.message },
+          { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase, error: error.message },
           this.options.defaultLabels
         )
       )
@@ -229,7 +229,7 @@ export class PgPoolPrometheusExporter {
     if (this.poolHost != null && this.poolDatabase != null) {
       this.poolActiveConnections.dec(
         mergeLabelsWithStandardLabels(
-          { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+          { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
           this.options.defaultLabels
         )
       )
@@ -240,13 +240,13 @@ export class PgPoolPrometheusExporter {
     if (this.poolHost != null && this.poolDatabase != null) {
       this.poolSize.dec(
         mergeLabelsWithStandardLabels(
-          { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+          { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
           this.options.defaultLabels
         )
       )
       this.poolConnectionsRemovedTotal.inc(
         mergeLabelsWithStandardLabels(
-          { host: this.poolHost + ':' + this.poolPort.toString(), database: this.poolDatabase },
+          { host: `${this.poolHost}:${this.poolPort.toString()}`, database: this.poolDatabase },
           this.options.defaultLabels
         )
       )

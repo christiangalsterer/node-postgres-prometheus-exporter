@@ -59,7 +59,7 @@ export class PgClientPrometheusExporter {
     if (this.client.database != null) {
       this.clientErrors.inc(
         mergeLabelsWithStandardLabels(
-          { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database },
+          { host: `${this.client.host}:${this.client.port.toString()}`, database: this.client.database },
           this.options.defaultLabels
         )
       )
@@ -70,7 +70,7 @@ export class PgClientPrometheusExporter {
     if (this.client.database != null) {
       this.clientDisconnects.inc(
         mergeLabelsWithStandardLabels(
-          { host: this.client.host + ':' + this.client.port.toString(), database: this.client.database },
+          { host: `${this.client.host}:${this.client.port.toString()}`, database: this.client.database },
           this.options.defaultLabels
         )
       )
